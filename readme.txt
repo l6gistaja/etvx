@@ -43,4 +43,4 @@ Perl modules needed:
  XML::Simple
 
 License: BSD 3-Clause License http://www.opensource.org/licenses/BSD-3-Clause
-Author: juks@alkohol.ee
+Author: juks alkohol ee
