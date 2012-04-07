@@ -1,14 +1,13 @@
 Scripts for automatic scheduling and downloading Estonian TV live streams
-    (http://otse.err.ee) with Linux, Perl and SQLite3, 2012-03-04.
+    (http://otse.err.ee) with Linux, Perl and SQLite3, 2012-04-08.
 
 For quickstart, enter etvx directory and type to commandline
     ./schedule_etvx.pl
 or
     ./schedule_etvx.pl -h
 
-Some kind of RTMP downloader should be used, for that reason compiled
-(without SSL support, make XDEF=-DNO_SSL) rtmpdump was included into this
-package. About RTMPDump, see http://rtmpdump.mplayerhq.hu .
+rtmpdump was used as RTMP downloader, it was compiled without SSL support 
+(make XDEF=-DNO_SSL). About RTMPDump, see http://rtmpdump.mplayerhq.hu .
 
 Exact download Bash command can be configured in SQLite DB table
 configuration where category = 'perlCfg' and name = 'downloadCommandFormat':
