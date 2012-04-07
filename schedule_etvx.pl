@@ -81,25 +81,25 @@ my %cdate = %today;
 
 ############## Search filter
 
-my @searchFilter = [
-    'D', 'Downloaded' , [
-        '0', 'Ignore',
-        'N', 'No',
-        'Y', 'Yes'
-    ],
-    'T', 'Brodcast\'s time' , [
-        '0', 'Ignore',
-        'Y', 'Selected year',
-        'M', 'Selected month',
-        'D', 'Selected date',
-        'F', 'In future',
-        'P', 'In past'
-    ],
-    'C', 'Channel' , [
-        '0', 'Ignore',
-        'S', 'Selected channel'
-    ],
-];
+# my @searchFilter = [
+#     'D', 'Downloaded' , [
+#         '0', 'Ignore',
+#         'N', 'No',
+#         'Y', 'Yes'
+#     ],
+#     'T', 'Brodcast\'s time' , [
+#         '0', 'Ignore',
+#         'Y', 'Selected year',
+#         'M', 'Selected month',
+#         'D', 'Selected date',
+#         'F', 'In future',
+#         'P', 'In past'
+#     ],
+#     'C', 'Channel' , [
+#         '0', 'Ignore',
+#         'S', 'Selected channel'
+#     ],
+# ];
 
 my $d = new UI::Dialog (%uiDialog);
 
@@ -275,11 +275,22 @@ while ($m ne "Q" && $cont) {
                     if($time =~ /($cfg{'hhmm24Regexp'})/) {
                     
                         $addedbroadcasts++;
+                        my $addday = 0;
+                        my $previoustime = $y[0]->{'t0'};
+                        
                         for(my $i=0; $i < $#y; $i++) {
+                        
+                            if($previoustime gt $y[$i]->{'t0'}) {
+                                $addday++;
+                            }
+                            $previoustime = $y[$i]->{'t0'};
+                            
                             if($time eq $y[$i]->{'t0'}) {
-                                
+                                (my $year, my $month, my $day)  =
+                                        Add_Delta_Days($today{'y'},$today{'m'},$today{'d'},
+                                            $addday);
                                 my $starttime = sprintf($cfg{'dateFormat'},
-                                    $cdate{'y'},$cdate{'m'},$cdate{'d'})
+                                    $year,$month,$day)
                                     .' '.$y[$i]->{'t0'}.':00';
                                 #check that braodcast isnt already added
                                 my $sth2 = $dbh->prepare('SELECT count(id) AS c FROM broadcasts WHERE t0ts = strftime(\'%s\',?) AND channel_id = ?');
@@ -292,8 +303,9 @@ while ($m ne "Q" && $cont) {
                                 } else {
                                     $addedBroadcasts++;
                                     (my $year, my $month, my $day)  =
-                                        Add_Delta_Days($today{'y'},$today{'m'},$today{'d'}, 
-                                            $y[$i+1]->{'t0'} < $y[$i+1]->{'t1'} ? 1 : 0);
+                                        Add_Delta_Days($today{'y'},$today{'m'},$today{'d'},
+                                            $addday 
+                                            + ($y[$i]->{'t0'} gt $y[$i+1]->{'t0'} ? 1 : 0));
                                     my $endtime = sprintf($cfg{'dateFormat'},$year,$month,$day)
                                         .' '.$y[$i+1]->{'t0'}.':00';
                                     $sth->execute(
@@ -303,6 +315,7 @@ while ($m ne "Q" && $cont) {
                                         $starttime,
                                         $endtime
                                     );
+                                    #print $starttime.' - '.$endtime."\n";
                                 }
                             }
                         }
@@ -385,9 +398,11 @@ while ($m ne "Q" && $cont) {
         
         my @options = search_results('b.t0ts >= strftime(\'%s\',\''
             .sprintf($cfg{'dateFormat'},$cdate{'y'},$cdate{'m'},$cdate{'d'})
-            .' 00:00:00\') AND b.t0ts <= strftime(\'%s\',\''
-            .sprintf($cfg{'dateFormat'},$cdate{'y'},$cdate{'m'},$cdate{'d'})
-            .' 23:59:59\')',
+            .' 00:00:00\')'
+            # AND b.t0ts <= strftime(\'%s\',\''
+            #.sprintf($cfg{'dateFormat'},$cdate{'y'},$cdate{'m'},$cdate{'d'})
+            #.' 23:59:59\')'
+            ,
             
             'checklist');
         
