@@ -411,11 +411,13 @@ while ($m ne "Q" && $cont) {
             'text'=>'Broadcast',
             'list'=>\@options);
             
-        if($#item > -1) {
-            $sth = $dbh->prepare('DELETE FROM broadcasts WHERE id IN ('.join(',',@item).')');
-            $sth->execute();
-            $sth->finish();
-            $msg = ($#item + 1) .' broadcasts deleted.';
+        if ($d->state() ne "CANCEL") {
+            if($#item > -1) {
+                $sth = $dbh->prepare('DELETE FROM broadcasts WHERE id IN ('.join(',',@item).')');
+                $sth->execute();
+                $sth->finish();
+                $msg = ($#item + 1) .' broadcasts deleted.';
+            }
         }
             
 ################################################################################
