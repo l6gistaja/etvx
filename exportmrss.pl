@@ -22,9 +22,9 @@ while(my $result = $sth->fetchrow_hashref()) {
     }
     print '<pubDate>'.strftime($rfc822,gmtime($result->{'t0ts'})).'</pubDate>'."\n";
     print '<media:content url="'.$result->{'filename'}.'" duration="'.$result->{'duration'}.'" medium="video"/>'."\n";
-    print '<guid>jae/etvx/c='.sprintf("%x",$result->{'cid'})
-        .'/t='.sprintf("%x",$result->{'t0ts'}/60)
-        .'/i='.sprintf("%x",$result->{'id'}).'</guid>'."\n";
+    print '<guid>jae/etvx/c_'.sprintf("%x",$result->{'cid'})
+        .'/t_'.sprintf("%x",$result->{'t0ts'}/60)
+        .'_i_'.sprintf("%x",$result->{'id'}).'</guid>'."\n";
     #print '<media:keywords>'.$result->{'cname'}.'</media:keywords>'."\n";
     print '</item>'."\n";
 }
