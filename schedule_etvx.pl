@@ -58,15 +58,20 @@ $sth->finish();
 ############## Channels
 
 my %channels = qw();
+my %channels_next = qw();
 my $selected_channel = -1;
+my $previous_channel = -1;
 $sth = $dbh->prepare("SELECT * FROM channels ORDER BY name");
 $sth->execute();
 while(my $result = $sth->fetchrow_hashref()) {
     if($selected_channel == -1) { $selected_channel = $result->{'id'}; }
     $channels{$result->{'id'}} = $result;
+    $channels_next{$previous_channel} = $result->{'id'};
+    $previous_channel = $result->{'id'};
 }
+$channels_next{$previous_channel} = $channels_next{-1};
 $sth->finish();
-#print Dumper(%channels);
+#print Dumper(%channels_next);
 
 ############### Today
 
@@ -124,7 +129,7 @@ while ($m ne "Q" && $cont) {
             'W','Broadcast\'s webpages (if using this with Xserver)',
             'R','Remove scheduled broadcasts from queue ',
             'S','Search scheduled broadcasts by name ',
-            'C','Choose channel (currently '.$channels{$selected_channel}->{
+            'C','Change channel (currently '.$channels{$selected_channel}->{
             'name'}.') ',
             'M','Choose day from current month ',
             'I','Input day ',
@@ -153,10 +158,17 @@ while ($m ne "Q" && $cont) {
             push @channelsmenu, $cv->{'id'};
             push @channelsmenu, $cv->{'name'};
         }
-        my $channelschoice = $d->menu('title'=>'Choose channel (currently '.$channels{$selected_channel}->{
-            'name'}.')',
-         'list'=>\@channelsmenu,
-        );
+        
+        my $channelschoice;
+        if($cfg{'menuOnClickChooseNext'}) {
+            $channelschoice = $channels_next{$selected_channel};
+        } else {
+            $channelschoice = $d->menu('title'=>'Choose channel (currently '.$channels{$selected_channel}->{
+                'name'}.')',
+            'list'=>\@channelsmenu,
+            );
+        }
+        
         if($channelschoice) { 
             $selected_channel = $channelschoice;
             $msg = 'Channel changed to '.$channels{$selected_channel}->{
@@ -371,7 +383,8 @@ while ($m ne "Q" && $cont) {
                     do {
                         $m = $d->menu(
                             'title'=>'Search broadcasts: '.$searchstr,
-                            'list'=> \@options
+                            'list'=> \@options,
+                            'text'=> 'Click OK for new search'
                         );
                         
                         if($m =~/^\d+$/ && $m ne '0') { 
@@ -580,7 +593,7 @@ sub showbroadcast {
             'Download', $result->{'download_started'} eq '1' ?
                 ($result->{'timenow'} > $result->{'t1ts'} ?
                     'Download finished'
-                        .($result->{'watch_url'} =~/[^\s]+/ ? ', watch' : '')
+                        .($result->{'watch_url'} =~/[^\s]+/ ? ', click to watch' : '')
                     :'Download started')
                 : 'Not downloaded',
             'Filename', $result->{'filename'},

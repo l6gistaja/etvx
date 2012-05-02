@@ -1,5 +1,5 @@
 Scripts for automatic scheduling and downloading Estonian TV live streams
-    (http://otse.err.ee) with Linux, Perl and SQLite3, 2012-04-08.
+    (http://otse.err.ee) with Linux, Perl and SQLite3, 2012-05-02.
 
 For quickstart, enter etvx directory and type to commandline
     ./schedule_etvx.pl
@@ -23,6 +23,9 @@ ETV's RTMP stream's URLs can be seen from:
 
 Program schedule's HTML URLs can be combined by concatenating DB columns
 channels.xml_url and channels.xml_filetemplate.
+
+Completed downloads can be exported in MediaRSS format by running:
+    ./exportmrss.pl
 
 Developed and tested with:
     Linux kernel 2.6.26-2-686
