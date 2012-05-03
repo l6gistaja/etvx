@@ -20,7 +20,7 @@ print '<pubDate>'.strftime($rfc822,localtime).'</pubDate>'."\n";
 
 my $dbh = DBI->connect("dbi:SQLite:development.sqlite3", "", "",
 {RaiseError => 1, AutoCommit => 1});
-my $sth = $dbh->prepare("select b.filename, b.name, b.description, c.name as cname, t1ts-t0ts as duration, c.id as cid, b.t0ts, b.id from broadcasts b, channels c where "
+my $sth = $dbh->prepare("select b.filename, b.name, b.description, c.name as cname, t1ts-t0ts as duration, c.id as cid, b.t0ts, b.id, b.pid from broadcasts b, channels c where "
     .($opt{a} ? "" : "(b.filename is not null or b.filename <> '') and ")
     ."b.channel_id=c.id");
 $sth->execute();
@@ -34,7 +34,8 @@ while(my $result = $sth->fetchrow_hashref()) {
     print '<media:content url="'.$result->{'filename'}.'" duration="'.$result->{'duration'}.'" medium="video"/>'."\n";
     print '<guid>jae/etvx/c_'.sprintf("%x",$result->{'cid'})
         .'/t_'.sprintf("%x",$result->{'t0ts'}/60)
-        .'_i_'.sprintf("%x",$result->{'id'}).'</guid>'."\n";
+        .'_i_'.sprintf("%x",$result->{'id'})
+        .'_p_'.sprintf("%x",$result->{'pid'}).'</guid>'."\n";
     #print '<media:keywords>'.$result->{'cname'}.'</media:keywords>'."\n";
     print '</item>'."\n";
 }
