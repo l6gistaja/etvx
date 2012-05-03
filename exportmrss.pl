@@ -25,7 +25,7 @@ my $sth = $dbh->prepare("select b.filename, b.name, b.description, c.name as cna
     ."b.channel_id=c.id");
 $sth->execute();
 while(my $result = $sth->fetchrow_hashref()) {
-    print '<item>'."\n";
+    print "\n<item>\n";
     print '<title>'.$result->{'name'}.'</title>'."\n";
     if($result->{'description'} ne '') {
         print '<description>'.$result->{'description'}.'</description>'."\n";
@@ -42,6 +42,6 @@ while(my $result = $sth->fetchrow_hashref()) {
 
 $sth->finish();
 $dbh->disconnect;
-print '</channel>'."\n";
+print "\n</channel>\n";
 print '</rss>'."\n";
 
