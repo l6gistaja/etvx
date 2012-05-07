@@ -285,7 +285,7 @@ while ($m ne "Q" && $cont) {
             my $addedbroadcasts = 0;
             if($#item > -1) {
 
-                $sth = $dbh->prepare('INSERT INTO broadcasts (url,name,channel_id,t0ts,t1ts,created_at,download_started) VALUES (?,?,?,strftime(\'%s\',?),strftime(\'%s\',?),datetime(\'now\',\'localtime\'),0);');
+                $sth = $dbh->prepare('INSERT INTO broadcasts (url,name,channel_id,t0ts,t1ts,created_at,download_started, height, width) VALUES (?,?,?,strftime(\'%s\',?),strftime(\'%s\',?),datetime(\'now\',\'localtime\'),0,?,?);');
                 my $addedBroadcasts = 0;
                 my $rejectedBroadcasts = 0;
                 
@@ -332,7 +332,9 @@ while ($m ne "Q" && $cont) {
                                         $y[$i]->{'label'},
                                         $selected_channel,
                                         $starttime,
-                                        $endtime
+                                        $endtime,
+                                        $channels{$selected_channel}->{'height'},
+                                        $channels{$selected_channel}->{'width'}
                                     );
                                     #print $starttime.' - '.$endtime."\n";
                                 }
@@ -579,7 +581,7 @@ sub showbroadcast {
     
     while ($bcui->state() ne "CANCEL" && !$deleted) {
         
-        my $sth2 = $dbh->prepare('SELECT b.name AS bname, strftime(\'%Y-%m-%d\',b.t0ts,\'unixepoch\') AS day, strftime(\'%H:%M\',b.t0ts,\'unixepoch\')  AS time0, strftime(\'%H:%M\',b.t1ts,\'unixepoch\') AS time1, strftime(\'%s\',datetime(\'now\',\'localtime\')) AS timenow, b.t1ts, c.name AS cname, b.download_started, b.url, b.description, b.filename, c.flv_directory, c.watch_url FROM broadcasts b, channels c WHERE b.id = ? AND b.channel_id=c.id');
+        my $sth2 = $dbh->prepare('SELECT b.name AS bname, strftime(\'%Y-%m-%d\',b.t0ts,\'unixepoch\') AS day, strftime(\'%H:%M\',b.t0ts,\'unixepoch\')  AS time0, strftime(\'%H:%M\',b.t1ts,\'unixepoch\') AS time1, strftime(\'%s\',datetime(\'now\',\'localtime\')) AS timenow, b.t1ts, c.name AS cname, b.download_started, b.url, b.description, b.filename, c.flv_directory, c.watch_url, b.width, b.height FROM broadcasts b, channels c WHERE b.id = ? AND b.channel_id=c.id');
         $sth2->execute($bcid);
         my $result = $sth2->fetchrow_hashref();
         
@@ -677,7 +679,11 @@ sub showbroadcast {
             && $result->{'watch_url'} =~/[^\s]+/
         ) {
             system($cfg{'webbrowser'}.' \''
-                .sprintf($result->{'watch_url'},$result->{'filename'}).'\' &');
+                .sprintf($result->{'watch_url'}
+                    ,$result->{'filename'}
+                    ,$result->{'height'}
+                    ,$result->{'width'}
+                ).'\' &');
             $msg = 'Webplayer opened.';
         }
         
