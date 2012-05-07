@@ -120,6 +120,13 @@ while ($m ne "Q" && $cont) {
 
   @ps_output = `$ps_cmd`;
   
+    @timeData = localtime(time);
+    %today = (
+        'y' => 1900 + $timeData[5],
+        'm' => 1+$timeData[4],
+        'd' => $timeData[3]
+    );
+  
   # our main menu...
   $m = $d->menu(
          'title'=>'Scheduler\'s main menu ('.sprintf($cfg{'dateFormat'},$cdate{'y'},$cdate{'m'},$cdate{'d'}).')',
