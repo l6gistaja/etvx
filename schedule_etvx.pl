@@ -258,10 +258,8 @@ while ($m ne "Q" && $cont) {
 
     } elsif ($m eq "A" || $m eq "W") {
             
-        my $xmlfile = sprintf($channels{$selected_channel}->{
-            'xml_filetemplate'}, $cdate{'y'},$cdate{'m'},$cdate{'d'});
-        my $data = fetch_xml($channels{$selected_channel}->{
-            'xml_url'}, $xmlfile);
+        my $data = fetch_xml(sprintf($channels{$selected_channel}->{
+            'xml_url'}, $cdate{'y'},$cdate{'m'},$cdate{'d'}));
         my @y = data_etv120229($data);
         #print Dumper(@y);
 
@@ -541,37 +539,6 @@ sub set_date {
     } else { return ''; }
 }
 
-
-sub fetch_xml {
-    
-    # cache during one session
-    if(!(-e $cfg{'cacheDir'}.$cfg{'dirDelimiter'}.$_[1])) {
-        my $ff = File::Fetch->new(uri => $_[0].$_[1]);
-        my $where = $ff->fetch('to' => $cfg{'cacheDir'}) or die $ff->error;
-    }
-    
-    my $xmlfile = sprintf($cfg{'cacheFilenameFormat'},
-        $cdate{'y'},$cdate{'m'},$cdate{'d'},
-        $selected_channel);
-    
-    if(!(-e $cfg{'cacheDir'}.$cfg{'dirDelimiter'}.$xmlfile)) {
-        # cleans utf8 shitty html to utf8 xhtml (often)
-        my $tree = HTML::TreeBuilder->new; # empty tree
-        $tree->parse_file($cfg{'cacheDir'}.$cfg{'dirDelimiter'}.$_[1]);
-        open (INDEXFILE2, ">", $cfg{'cacheDir'}.$cfg{'dirDelimiter'}.$xmlfile);
-        #binmode INDEXFILE2, ":utf8";
-        print INDEXFILE2 $tree->as_XML;
-        close(INDEXFILE2);
-        $tree = $tree->delete;
-    }
-    
-    # create object
-    my $xml = new XML::Simple;
-    
-    # read XML file
-    return $xml->XMLin($cfg{'cacheDir'}.$cfg{'dirDelimiter'}.$xmlfile);
-}
-
 sub showbroadcast {
     my $bcui = new UI::Dialog (%uiDialog);
     my $bcui2 = new UI::Dialog (%uiDialog);
@@ -689,6 +656,39 @@ sub showbroadcast {
         
     }
 
+}
+
+sub fetch_xml {
+    
+    my $xmlfile = sprintf($cfg{'cacheFilenameFormat'},
+        $cdate{'y'},$cdate{'m'},$cdate{'d'},
+        $selected_channel);
+    
+    # cache during one session
+    if(!(-e $cfg{'cacheDir'}.$cfg{'dirDelimiter'}.$cfg{'rawHTMLprefix'}.$xmlfile)) {
+        my $ff = File::Fetch->new(uri => $_[0]);
+        my $raw_html = '';
+        my $where = $ff->fetch('to' => $cfg{'cacheDir'}) or die $ff->error;
+        my @path = split(/$cfg{'dirDelimiter'}/,$where);
+        system('mv '.$cfg{'cacheDir'}.$cfg{'dirDelimiter'}.$path[$#path].' '.$cfg{'cacheDir'}.$cfg{'dirDelimiter'}.$cfg{'rawHTMLprefix'}.$xmlfile);
+    }
+    
+    if(!(-e $cfg{'cacheDir'}.$cfg{'dirDelimiter'}.$xmlfile)) {
+        # cleans utf8 shitty html to utf8 xhtml (often)
+        my $tree = HTML::TreeBuilder->new; # empty tree
+        $tree->parse_file($cfg{'cacheDir'}.$cfg{'dirDelimiter'}.$cfg{'rawHTMLprefix'}.$xmlfile);
+        open (INDEXFILE2, ">", $cfg{'cacheDir'}.$cfg{'dirDelimiter'}.$xmlfile);
+        #binmode INDEXFILE2, ":utf8";
+        print INDEXFILE2 $tree->as_XML;
+        close(INDEXFILE2);
+        $tree = $tree->delete;
+    }
+    
+    # create object
+    my $xml = new XML::Simple;
+    
+    # read XML file
+    return $xml->XMLin($cfg{'cacheDir'}.$cfg{'dirDelimiter'}.$xmlfile);
 }
 
 sub data_etv120229 {
