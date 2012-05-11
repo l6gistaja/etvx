@@ -1,0 +1,136 @@
+﻿<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <style type="text/css">
+                body
+                {
+                font-family: Arial,Helvetica,sans-serif;
+                font-size: 12px;
+                }
+                .cont
+                {
+                float: left;
+                height: 375px;
+                margin-bottom: 0;
+                margin-left: 0;
+                margin-right: 0;
+                margin-top: 0;
+                width: 100%;
+                font-size: 12px;
+                overflow: auto;
+                padding-bottom: 0;
+                padding-left: 0;
+                padding-right: 0;
+                padding-top: 0;
+                }
+                h3
+                {
+                font-size: 12px;
+                margin: 0px;
+                padding-left: 15px;
+                font-weight: normal;
+                }
+                h3.live
+                {
+                background-image: url(ico_live.gif);
+                background-repeat: no-repeat;
+                background-position: 5px 2px;
+                background-attachment: scroll;
+                }
+                h3.nolive
+                {
+                background-image: url(ico_nolive.gif);
+                background-repeat: no-repeat;
+                background-position: 5px 2px;
+                background-attachment: scroll;
+                }
+                p.description
+                {
+                display: block;
+                color: #636363;
+                font-size: small;
+                }
+                a
+                {
+                color: #0060AF;
+                }
+                a.empty
+                {
+                cursor: default;
+                color: black;
+                text-decoration: none;
+                }
+                span.time
+                {
+                font-size: 12px;
+                margin: 0px 5px;
+                font-weight: bold;
+                }
+                div.content
+                {
+                padding: 3px;
+                }
+                div.content_empty
+                {
+                display: none;
+                height: 0px;
+                }
+                h3.lhead
+                {
+                margin: 3px;
+                font-weight: bold;
+                }
+
+                span.image1
+                {
+                background-image: url(ico_live.gif);
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                }
+                span.image2
+                {
+                background-image: url(ico_nolive.gif);
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                }
+                p
+                {
+                margin: 0;
+                display: inline;
+                }
+                .ko
+                {
+                    display:none;
+                }
+            </style>
+  </head>
+  <body>
+    <div id="accordion">
+      <h3 class="nolive"><span class="time">07:10</span><a href="http://etv2.err.ee/?0536614&amp;kuu=20120511#d30357" target="_blank">Väike Nicolas*</a></h3>
+      <h3 class="live"><span class="time">07:20</span><a href="http://etv2.err.ee/?0536614&amp;kuu=20120511#d30358" target="_blank">Kevadlaulud Saaremaal*</a></h3>
+      <h3 class="live"><span class="time">07:45</span><a href="http://etv2.err.ee/?0536614&amp;kuu=20120511#d30359" target="_blank">Tule õue!, 14/16*</a></h3>
+      <h3 class="live"><span class="time">08:15</span><a href="http://etv2.err.ee/?0536614&amp;kuu=20120511#d30360" target="_blank">Lastetuba*</a></h3>
+      <h3 class="live"><span class="time">08:30</span><a href="http://etv2.err.ee/?0536614&amp;kuu=20120511#d30361" target="_blank">Siia, siia, siirdu, viirgu!</a></h3>
+      <h3 class="nolive"><span class="time">08:55</span><a href="http://etv2.err.ee/?0536614&amp;kuu=20120511#d30362" target="_blank">Minuscule</a></h3>
+      <h3 class="live"><span class="time">09:00</span><a href="http://etv2.err.ee/?0536614&amp;kuu=20120511#d30363" target="_blank">Ringvaade*</a></h3>
+      <h3 class="live"><span class="time">10:05</span><a href="http://etv2.err.ee/?0536614&amp;kuu=20120511#d30364" target="_blank">ERR uudised</a></h3>
+      <h3 class="nolive"><span class="time">17:20</span><a href="http://etv2.err.ee/?0536614&amp;kuu=20120511#d30365" target="_blank">Smallville</a></h3>
+      <h3 class="nolive"><span class="time">18:00</span><a href="http://etv2.err.ee/?0536614&amp;kuu=20120511#d30366" target="_blank">Muumioru lood</a></h3>
+      <h3 class="live"><span class="time">18:25</span><a href="http://etv2.err.ee/?0536614&amp;kuu=20120511#d30367" target="_blank">Lastetuba</a></h3>
+      <h3 class="nolive"><span class="time">18:35</span><a href="http://etv2.err.ee/?0536614&amp;kuu=20120511#d30368" target="_blank">Väikese Muti seiklused</a></h3>
+      <h3 class="nolive"><span class="time">19:05</span><a href="http://etv2.err.ee/?0536614&amp;kuu=20120511#d30369" target="_blank">Väike Nicolas</a></h3>
+      <h3 class="live"><span class="time">19:20</span><a href="http://etv2.err.ee/?0536614&amp;kuu=20120511#d30370" target="_blank">Aktuaalne kaamera (viipekeeles)</a></h3>
+      <h3 class="live"><span class="time">19:30</span><a href="http://etv2.err.ee/?0536614&amp;kuu=20120511#d30371" target="_blank">Aktuaalne kaamera (vene keeles)</a></h3>
+      <h3 class="nolive"><span class="time">20:00</span><a href="http://etv2.err.ee/?0536614&amp;kuu=20120511#d30195" target="_blank">Viimane võimalus näha, 1/7</a></h3>
+      <h3 class="live"><span class="time">21:00</span><a href="http://etv2.err.ee/?0536614&amp;kuu=20120511#d30373" target="_blank">Põrgu Wärk</a></h3>
+      <h3 class="nolive"><span class="time">23:15</span><a href="http://etv2.err.ee/?0536614&amp;kuu=20120511#d30374" target="_blank">Thomas Malthus ja viimane söömaaeg</a></h3>
+      <h3 class="live"><span class="time">00:10</span><a href="http://etv2.err.ee/?0536614&amp;kuu=20120511#d30375" target="_blank">Täna õhtul Kuldne Trio</a></h3>
+      <h3 class="live"><span class="time">01:11</span><a href="http://etv2.err.ee/?0536614&amp;kuu=20120511#d30376" target="_blank">ERR uudised</a></h3>
+    </div><br><img src="ico_live.gif" alt="Otseülekanne">
+        Edastatakse internetis
+        <br><img src="ico_nolive.gif" alt="Puuduvad interneti õigused">
+        Edastatakse vaid Eestis
+      <br></body>
+</html>

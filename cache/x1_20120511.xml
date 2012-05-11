@@ -1,0 +1,104 @@
+<html><head><meta content="text/html; charset=utf-8" http-equiv="Content-Type" /><style type="text/css">
+                body
+                {
+                font-family: Arial,Helvetica,sans-serif;
+                font-size: 12px;
+                }
+                .cont
+                {
+                float: left;
+                height: 375px;
+                margin-bottom: 0;
+                margin-left: 0;
+                margin-right: 0;
+                margin-top: 0;
+                width: 100%;
+                font-size: 12px;
+                overflow: auto;
+                padding-bottom: 0;
+                padding-left: 0;
+                padding-right: 0;
+                padding-top: 0;
+                }
+                h3
+                {
+                font-size: 12px;
+                margin: 0px;
+                padding-left: 15px;
+                font-weight: normal;
+                }
+                h3.live
+                {
+                background-image: url(ico_live.gif);
+                background-repeat: no-repeat;
+                background-position: 5px 2px;
+                background-attachment: scroll;
+                }
+                h3.nolive
+                {
+                background-image: url(ico_nolive.gif);
+                background-repeat: no-repeat;
+                background-position: 5px 2px;
+                background-attachment: scroll;
+                }
+                p.description
+                {
+                display: block;
+                color: #636363;
+                font-size: small;
+                }
+                a
+                {
+                color: #0060AF;
+                }
+                a.empty
+                {
+                cursor: default;
+                color: black;
+                text-decoration: none;
+                }
+                span.time
+                {
+                font-size: 12px;
+                margin: 0px 5px;
+                font-weight: bold;
+                }
+                div.content
+                {
+                padding: 3px;
+                }
+                div.content_empty
+                {
+                display: none;
+                height: 0px;
+                }
+                h3.lhead
+                {
+                margin: 3px;
+                font-weight: bold;
+                }
+
+                span.image1
+                {
+                background-image: url(ico_live.gif);
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                }
+                span.image2
+                {
+                background-image: url(ico_nolive.gif);
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                }
+                p
+                {
+                margin: 0;
+                display: inline;
+                }
+                .ko
+                {
+                    display:none;
+                }
+            </style></head><body>﻿ <div id="accordion"><h3 class="live"><span class="time">06:55</span><a href="http://etv.err.ee/?0562990" target="_blank">Terevisioon</a></h3><h3 class="nolive"><span class="time">08:55</span><a href="http://etv.err.ee/?0564115" target="_blank">Waterloo Roadi kool</a></h3><h3 class="live"><span class="time">09:45</span><a href="http://etv.err.ee/?0562990" target="_blank">Terevisioon*</a></h3><h3 class="live"><span class="time">11:45</span><a href="http://etv.err.ee/?0559482" target="_blank">Kahekõne*</a></h3><h3 class="live"><span class="time">12:40</span><a href="http://etv.err.ee/?0559274" target="_blank">MI*</a></h3><h3 class="live"><span class="time">13:10</span><a href="http://etv.err.ee/?0559330" target="_blank">Ajalik ja ajatu*</a></h3><h3 class="live"><span class="time">13:40</span><a href="http://etv.err.ee/?0536614&amp;kuu=20120511#d127567" target="_blank">Lähim Ida, 4/6* </a></h3><h3 class="live"><span class="time">14:10</span><a href="http://etv.err.ee/?0564317" target="_blank">Püramiidi tipus*</a></h3><h3 class="live"><span class="time">14:35</span><a href="http://etv.err.ee/?0559381" target="_blank">Kapital*</a></h3><h3 class="nolive"><span class="time">15:05</span><a href="http://etv.err.ee/?0536614&amp;kuu=20120511#d127570" target="_blank">IT-osakond</a></h3><h3 class="nolive"><span class="time">15:30</span><a href="http://etv.err.ee/?0536614&amp;kuu=20120511#d127571" target="_blank">Teekond Nirvaanasse</a></h3><h3 class="live"><span class="time">15:45</span><a href="http://etv.err.ee/?0558687" target="_blank">Reisile minuga*</a></h3><h3 class="nolive"><span class="time">16:10</span><a href="http://etv.err.ee/?0564115" target="_blank">Waterloo Roadi kool*</a></h3><h3 class="live"><span class="time">17:00</span><a href="http://etv.err.ee/?03346" target="_blank">Aktuaalne kaamera</a></h3><h3 class="live"><span class="time">17:10</span><a href="http://etv.err.ee/?0559432" target="_blank">Õnne 13</a></h3><h3 class="nolive"><span class="time">17:40</span><a href="http://etv.err.ee/?0561443" target="_blank">Südameasi</a></h3><h3 class="live"><span class="time">18:30</span><a href="http://etv.err.ee/?03346" target="_blank">Aktuaalne kaamera</a></h3><h3 class="live"><span class="time">19:00</span><a href="http://etv.err.ee/?0559352" target="_blank">Ringvaade</a></h3><h3 class="live"><span class="time">19:30</span><a href="http://etv.err.ee/?0561836" target="_blank">Tänavaristlejad, 13/15</a></h3><h3 class="live"><span class="time">20:00</span><a href="http://etv.err.ee/?0564707" target="_blank">Alpimaja, 5/5</a></h3><h3 class="live"><span class="time">21:00</span><a href="http://etv.err.ee/?03346" target="_blank">Aktuaalne kaamera. Ilm. Sport</a></h3><h3 class="live"><span class="time">21:40</span><a href="http://etv.err.ee/?0564075" target="_blank">Kaadris</a></h3><h3 class="nolive"><span class="time">22:00</span><a href="http://etv.err.ee/?0564892" target="_blank">Värvilised unenäod</a></h3><h3 class="live"><span class="time">23:00</span><a href="http://etv.err.ee/?0563041" target="_blank">Pealtnägija*</a></h3><h3 class="nolive"><span class="time">23:45</span><a href="http://etv.err.ee/?0561443" target="_blank">Südameasi*</a></h3><h3 class="live"><span class="time">00:35</span><a href="http://etv.err.ee/?0559352" target="_blank">Ringvaade*</a></h3><h3 class="live"><span class="time">01:09</span><a href="http://etv.err.ee/?0536614&amp;kuu=20120511#d127587" target="_blank">ERR uudised</a></h3></div><br /><img alt="Otseülekanne" src="ico_live.gif" /> Edastatakse internetis <br /><img alt="Puuduvad interneti õigused" src="ico_nolive.gif" /> Edastatakse vaid Eestis <br /></body></html>
