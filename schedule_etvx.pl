@@ -260,8 +260,17 @@ while ($m ne "Q" && $cont) {
             
         my $data = fetch_xml(sprintf($channels{$selected_channel}->{
             'xml_url'}, $cdate{'y'},$cdate{'m'},$cdate{'d'}));
-        my @y = data_etv120229($data);
-        #print Dumper(@y);
+        my $populator = $channels{$selected_channel}->{'populator'};
+        require sprintf($cfg{'populatorFile'},$populator);
+        my $populatornotfound = '';
+        my $coderef=__PACKAGE__->can($cfg{'populatorSubPrefix'}.$populator) or $populatornotfound = "Populator $populator not found!\n";
+        my @y;
+        if($populatornotfound ne '') {
+            print $populatornotfound;
+            @y = qw();
+        } else  {
+            @y = $coderef->($data);
+        }
 
         my @options = qw();
         
@@ -283,7 +292,7 @@ while ($m ne "Q" && $cont) {
             my $addedbroadcasts = 0;
             if($#item > -1) {
 
-                $sth = $dbh->prepare('INSERT INTO broadcasts (url,name,channel_id,t0ts,t1ts,created_at,download_started, height, width) VALUES (?,?,?,strftime(\'%s\',?),strftime(\'%s\',?),datetime(\'now\',\'localtime\'),0,?,?);');
+                $sth = $dbh->prepare('INSERT INTO broadcasts (url,name,channel_id,t0ts,t1ts,created_at,download_started,height, width,description) VALUES (?,?,?,strftime(\'%s\',?),strftime(\'%s\',?),datetime(\'now\',\'localtime\'),0,?,?,?);');
                 my $addedBroadcasts = 0;
                 my $rejectedBroadcasts = 0;
                 
@@ -332,7 +341,8 @@ while ($m ne "Q" && $cont) {
                                         $starttime,
                                         $endtime,
                                         $channels{$selected_channel}->{'height'},
-                                        $channels{$selected_channel}->{'width'}
+                                        $channels{$selected_channel}->{'width'},
+                                        $y[$i]->{'description'}
                                     );
                                     #print $starttime.' - '.$endtime."\n";
                                 }
@@ -689,19 +699,6 @@ sub fetch_xml {
     
     # read XML file
     return $xml->XMLin($cfg{'cacheDir'}.$cfg{'dirDelimiter'}.$xmlfile);
-}
-
-sub data_etv120229 {
-    my $data = $_[0];
-    my @y = qw();
-    foreach (@{$data->{body}->{div}->{h3}}) {
-        my $yi = {};
-        $yi->{'t0'} = $_->{span}->{content};
-        $yi->{'label'} = $_->{a}->{content};
-        $yi->{'url'} = $_->{a}->{href};
-        push @y, $yi;
-    }
-    return @y;
 }
 
 $dbh->disconnect;
